@@ -37,7 +37,7 @@ const Home: React.FC = () => {
     if (!newTask.trim()) return;
     try {
       const res = await axiosInstance.post("/tasks", { title: newTask });
-      setTasks([...tasks, res.data.task]);
+      setTasks([...tasks, res.data]);
       setNewTask("");
     } catch (err) {
       console.error("Error adding task:", err);
