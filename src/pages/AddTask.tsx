@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
-import "./task.css";
+
 
 const AddTask: React.FC = () => {
   const [title, setTitle] = useState("");
