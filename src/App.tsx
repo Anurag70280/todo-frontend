@@ -5,7 +5,6 @@ import { AuthContext } from "./context/AuthContext";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-import AddTask from "./pages/AddTask";
 import { useContext } from "react";
 
 const App: React.FC = () => {
@@ -31,14 +30,6 @@ const App: React.FC = () => {
             }
           />
 
-          <Route
-            path="/add"
-            element={
-              <ProtectedRoute>
-                <AddTask />
-              </ProtectedRoute>
-            }
-          />
         </Routes>
       </Router>
     </AuthProvider>
