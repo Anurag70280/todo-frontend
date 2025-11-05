@@ -1,29 +1,32 @@
-import { useState, useEffect, type ReactNode } from "react";
-import { AuthContext, type AuthContextType } from "./AuthContext";
+import React, { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 interface AuthProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-    }
+    if (storedToken) setToken(storedToken);
+    setLoading(false); 
   }, []);
 
-  const login: AuthContextType["login"] = (newToken) => {
+  const login = (newToken: string) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
   };
 
-  const logout: AuthContextType["logout"] = () => {
+  const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
   };
+
+ 
+  if (loading) return null;
 
   return (
     <AuthContext.Provider value={{ token, login, logout }}>
